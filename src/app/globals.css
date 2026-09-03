@@ -1,26 +1,102 @@
 @import "tailwindcss";
 
+@theme {
+  --color-background: #0B0B0C;
+  --color-surface: #161617;
+  --color-surface-variant: #1c1b1c;
+  --color-surface-dim: #131314;
+  --color-surface-container: #201f20;
+  --color-surface-container-high: #2a2a2b;
+  --color-surface-container-highest: #353436;
+  --color-primary: #F59E0B;
+  --color-primary-container: #613b00;
+  --color-primary-light: #FFC174;
+  --color-on-primary: #0B0B0C;
+  --color-secondary: #4EDEA3;
+  --color-secondary-container: #00a572;
+  --color-tertiary: #B6CCFF;
+  --color-outline: #353436;
+  --color-outline-variant: #252426;
+  --color-on-background: #E5E2E3;
+  --color-on-surface: #E5E2E3;
+  --color-on-surface-variant: #D8C3AD;
+
+  --font-sans: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0B0B0C;
+  --foreground: #E5E2E3;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-on-background);
+  font-family: var(--font-sans);
+}
+
+/* Custom interactive border with subtle amber glow */
+.interactive-border {
+  border: 1px solid var(--color-outline);
+  transition: border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.interactive-border:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.18);
+}
+
+/* Code-first tech badge */
+.tech-badge {
+  background-color: rgba(245, 158, 11, 0.08);
+  color: var(--color-primary);
+  border: 1px solid rgba(245, 158, 11, 0.28);
+  transition: all 0.2s ease;
+}
+
+.tech-badge:hover {
+  background-color: rgba(245, 158, 11, 0.16);
+  border-color: var(--color-primary);
+}
+
+/* Terminal blinking cursor */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.terminal-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 16px;
+  background-color: var(--color-primary);
+  animation: blink 1s step-end infinite;
+  vertical-align: middle;
+  margin-left: 4px;
+}
+
+/* Custom sleek scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-surface-container);
+  border: 1px solid var(--color-outline);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-outline);
 }
