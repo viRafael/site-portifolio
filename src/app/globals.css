@@ -8,13 +8,13 @@
   --color-surface-container: #201f20;
   --color-surface-container-high: #2a2a2b;
   --color-surface-container-highest: #353436;
-  --color-primary: #F59E0B;
-  --color-primary-container: #613b00;
-  --color-primary-light: #FFC174;
-  --color-on-primary: #0B0B0C;
-  --color-secondary: #4EDEA3;
-  --color-secondary-container: #00a572;
-  --color-tertiary: #B6CCFF;
+  --color-primary: #8E1D27;
+  --color-primary-container: #420a10;
+  --color-primary-light: #E2575F;
+  --color-on-primary: #FFFFFF;
+  --color-secondary: #1C3D6B;
+  --color-secondary-container: #0D1F38;
+  --color-tertiary: #6E97C8;
   --color-outline: #353436;
   --color-outline-variant: #252426;
   --color-on-background: #E5E2E3;
@@ -49,19 +49,19 @@ body {
 
 .interactive-border:hover {
   border-color: var(--color-primary);
-  box-shadow: 0 0 12px rgba(245, 158, 11, 0.18);
+  box-shadow: 0 0 12px rgba(142, 29, 39, 0.35);
 }
 
 /* Code-first tech badge */
 .tech-badge {
-  background-color: rgba(245, 158, 11, 0.08);
+  background-color: rgba(142, 29, 39, 0.12);
   color: var(--color-primary);
-  border: 1px solid rgba(245, 158, 11, 0.28);
+  border: 1px solid rgba(142, 29, 39, 0.35);
   transition: all 0.2s ease;
 }
 
 .tech-badge:hover {
-  background-color: rgba(245, 158, 11, 0.16);
+  background-color: rgba(142, 29, 39, 0.22);
   border-color: var(--color-primary);
 }
 

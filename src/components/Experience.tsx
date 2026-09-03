@@ -28,7 +28,7 @@ export function Experience() {
             <div
               className={`absolute -left-[41px] top-1.5 w-4 h-4 rounded-full border-4 border-background transition-all ${
                 exp.current
-                  ? "bg-primary shadow-[0_0_12px_rgba(245,158,11,0.6)]"
+                  ? "bg-primary shadow-[0_0_12px_rgba(142,29,39,0.6)]"
                   : "bg-surface-container border-outline"
               }`}
             />

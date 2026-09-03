@@ -44,7 +44,7 @@ export function Hero() {
           <div className="flex flex-wrap gap-4 pt-2">
             <Link
               href="#projetos"
-              className="font-mono text-xs uppercase tracking-widest font-semibold bg-primary text-on-primary px-6 py-3.5 hover:bg-[#ffb95f] transition-all flex items-center gap-2"
+              className="font-mono text-xs uppercase tracking-widest font-semibold bg-primary text-on-primary px-6 py-3.5 hover:bg-[#B02C38] transition-all flex items-center gap-2"
             >
               <span>{t.personal.ctaProjects}</span>
               <ArrowDown className="w-3.5 h-3.5" />

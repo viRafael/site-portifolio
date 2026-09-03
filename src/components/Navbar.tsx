@@ -82,7 +82,7 @@ export function Navbar() {
             download={t.personal.resumes[language].filename}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-mono text-xs font-semibold uppercase tracking-widest bg-primary text-on-primary px-4 py-2.5 hover:bg-[#ffb95f] transition-colors flex items-center gap-2"
+            className="font-mono text-xs font-semibold uppercase tracking-widest bg-primary text-on-primary px-4 py-2.5 hover:bg-[#B02C38] transition-colors flex items-center gap-2"
           >
             <FileText className="w-3.5 h-3.5" />
             <span>{t.nav.resume}</span>
@@ -157,7 +157,7 @@ export function Navbar() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setIsOpen(false)}
-            className="font-mono text-xs font-semibold uppercase tracking-wider bg-primary text-on-primary py-2.5 text-center flex items-center justify-center gap-1.5 hover:bg-[#ffb95f] transition-colors"
+            className="font-mono text-xs font-semibold uppercase tracking-wider bg-primary text-on-primary py-2.5 text-center flex items-center justify-center gap-1.5 hover:bg-[#B02C38] transition-colors"
           >
             <Download className="w-3.5 h-3.5" />
             <span>{t.nav.resume}</span>
