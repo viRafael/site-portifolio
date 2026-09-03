@@ -1,6 +1,6 @@
 "use client";
 
-import { GraduationCap, FlaskConical, Award, Briefcase } from "lucide-react";
+import { GraduationCap, FlaskConical, Award, Briefcase, ExternalLink } from "lucide-react";
 import { portfolioContent } from "@/data/portfolio";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -35,20 +35,49 @@ export function About() {
 
           {/* Mini Badges / Metrics */}
           <div className="grid grid-cols-2 gap-3 mt-6">
-            {t.about.highlights.map((item, index) => (
-              <div
-                key={index}
-                className="bg-surface border border-outline p-3.5 interactive-border"
-              >
-                <div className="mb-2">{iconMap[index]}</div>
-                <div className="text-[11px] font-mono text-on-surface-variant/70 uppercase tracking-wider">
-                  {item.label}
+            {t.about.highlights.map((item, index) => {
+              const cardContent = (
+                <>
+                  <div className="flex items-center justify-between mb-2">
+                    <div>{iconMap[index]}</div>
+                    {item.href && (
+                      <ExternalLink className="w-3.5 h-3.5 text-on-surface-variant/50 group-hover:text-primary transition-colors" />
+                    )}
+                  </div>
+                  <div className="text-[11px] font-mono text-on-surface-variant/70 uppercase tracking-wider">
+                    {item.label}
+                  </div>
+                  <div className="text-xs sm:text-sm font-medium text-on-background mt-0.5 group-hover:text-primary transition-colors">
+                    {item.value}
+                  </div>
+                  {item.href && (
+                    <div className="text-[10px] font-mono text-primary mt-2 flex items-center gap-1 opacity-80 group-hover:opacity-100 transition-opacity">
+                      <span>{language === "pt" ? "Acessar link" : "View link"}</span>
+                      <span>&rarr;</span>
+                    </div>
+                  )}
+                </>
+              );
+
+              return item.href ? (
+                <a
+                  key={index}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-surface border border-outline p-3.5 interactive-border group hover:border-primary transition-colors block cursor-pointer"
+                >
+                  {cardContent}
+                </a>
+              ) : (
+                <div
+                  key={index}
+                  className="bg-surface border border-outline p-3.5 interactive-border"
+                >
+                  {cardContent}
                 </div>
-                <div className="text-xs sm:text-sm font-medium text-on-background mt-0.5">
-                  {item.value}
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 

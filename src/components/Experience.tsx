@@ -1,6 +1,6 @@
 "use client";
 
-import { Sparkles } from "lucide-react";
+import { Sparkles, ExternalLink, FileText } from "lucide-react";
 import { portfolioContent } from "@/data/portfolio";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -51,11 +51,42 @@ export function Experience() {
               {exp.description}
             </p>
 
-            {/* Publication Badge (if applicable) */}
+            {/* Publication Badge & Research Link */}
             {exp.badge && (
-              <div className="inline-flex items-center gap-2 border border-primary/40 px-3 py-1.5 font-mono text-xs text-primary bg-primary/10 mb-4">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span className="font-semibold">{exp.badge}</span>
+              <div className="flex flex-wrap items-center gap-3 mb-4">
+                {exp.researchUrl ? (
+                  <a
+                    href={exp.researchUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${exp.badge} - ${language === "pt" ? "Acessar artigo" : "View paper"}`}
+                    className="inline-flex items-center gap-2 border border-primary/40 px-3 py-1.5 font-mono text-xs text-primary bg-primary/10 hover:bg-primary/20 hover:border-primary transition-all group/badge"
+                  >
+                    <Sparkles className="w-3.5 h-3.5" />
+                    <span className="font-semibold">{exp.badge}</span>
+                    <ExternalLink className="w-3.5 h-3.5 opacity-70 group-hover/badge:opacity-100 transition-opacity ml-0.5" />
+                  </a>
+                ) : (
+                  <div className="inline-flex items-center gap-2 border border-primary/40 px-3 py-1.5 font-mono text-xs text-primary bg-primary/10">
+                    <Sparkles className="w-3.5 h-3.5" />
+                    <span className="font-semibold">{exp.badge}</span>
+                  </div>
+                )}
+
+                {exp.researchUrl && (
+                  <a
+                    href={exp.researchUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-mono text-xs text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1.5 underline decoration-outline hover:decoration-primary underline-offset-4"
+                  >
+                    <FileText className="w-3.5 h-3.5 text-primary" />
+                    <span>
+                      {exp.researchLabel ||
+                        (language === "pt" ? "Acessar Artigo Completo" : "Read Research Paper")}
+                    </span>
+                  </a>
+                )}
               </div>
             )}
 

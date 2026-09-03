@@ -9,6 +9,8 @@ export interface Project {
   tags: string[];
   githubUrl: string;
   demoUrl?: string;
+  researchUrl?: string;
+  researchLabel?: string;
   icon: "api" | "bug" | "building";
   featured: boolean;
   colSpanDesktop: "col-span-7" | "col-span-5" | "col-span-8" | "col-span-4" | "col-span-12";
@@ -22,7 +24,15 @@ export interface Experience {
   current: boolean;
   description: string;
   badge?: string;
+  researchUrl?: string;
+  researchLabel?: string;
   skills: string[];
+}
+
+export interface HighlightItem {
+  label: string;
+  value: string;
+  href?: string;
 }
 
 export interface SkillCategory {
@@ -48,6 +58,7 @@ export interface PortfolioContent {
     email: string;
     github: string;
     linkedin: string;
+    researchUrl: string;
     ctaProjects: string;
     ctaContact: string;
     resumes: {
@@ -69,7 +80,7 @@ export interface PortfolioContent {
     subtitle: string;
     paragraphs: string[];
     quote: string;
-    highlights: Array<{ label: string; value: string }>;
+    highlights: HighlightItem[];
   };
   experienceSection: {
     sectionTag: string;
@@ -80,6 +91,7 @@ export interface PortfolioContent {
     sectionTag: string;
     title: string;
     viewSource: string;
+    viewResearch: string;
     projects: Project[];
   };
   skillsSection: {
@@ -92,6 +104,7 @@ export interface PortfolioContent {
   footer: {
     builtWith: string;
     backToTop: string;
+    researchLabel: string;
   };
 }
 
@@ -114,6 +127,8 @@ export const portfolioContent: Record<Language, PortfolioContent> = {
       email: "contato@rafaelvieira.dev",
       github: "https://github.com/viRafael",
       linkedin: "https://linkedin.com/in/rafael-vieiraa",
+      researchUrl:
+        "https://drive.google.com/file/d/1SQ5c2_XlFVYEGTERW3FSlOD4qIpctqsD/view?usp=sharing",
       ctaProjects: "Ver projetos",
       ctaContact: "Entrar em contato",
       resumes: {
@@ -152,7 +167,8 @@ export const portfolioContent: Record<Language, PortfolioContent> = {
         ],
         "cat research.txt": [
           "Aries Lab (CNPq PIBIC) - Investigação de Test Smells e Análise Estática",
-          "Artigo aceito/publicado no SBES 2025 & 2026",
+          "Artigo aceito no CBSoft / SBES (Tools Session)",
+          "Artigo completo: https://drive.google.com/file/d/1SQ5c2_XlFVYEGTERW3FSlOD4qIpctqsD/view?usp=sharing",
         ],
         "help": [
           "Comandos disponíveis: cat current_interests.txt, whoami, cat research.txt, cat education.txt, clear",
@@ -172,8 +188,16 @@ export const portfolioContent: Record<Language, PortfolioContent> = {
       ],
       highlights: [
         { label: "Graduação", value: "Sistemas de Informação (UFBA)" },
-        { label: "Pesquisa", value: "Aries Lab (CNPq PIBIC)" },
-        { label: "Produção Científica", value: "Publicação no SBES 2025 & 2026" },
+        {
+          label: "Pesquisa",
+          value: "Aries Lab (CNPq PIBIC)",
+          href: "https://drive.google.com/file/d/1SQ5c2_XlFVYEGTERW3FSlOD4qIpctqsD/view?usp=sharing",
+        },
+        {
+          label: "Produção Científica",
+          value: "Publicação no SBES 2025 & 2026",
+          href: "https://drive.google.com/file/d/1SQ5c2_XlFVYEGTERW3FSlOD4qIpctqsD/view?usp=sharing",
+        },
         { label: "Liderança", value: "Diretoria Comercial na TITAN" },
       ],
     },
@@ -190,6 +214,9 @@ export const portfolioContent: Record<Language, PortfolioContent> = {
           description:
             "Desenvolvimento do AriesLinter (Java/CheckStyle) focado na detecção de test smells em projetos open-source. A pesquisa contribui diretamente para a melhoria contínua da qualidade de software, manutenibilidade e confiabilidade de suítes de testes.",
           badge: "Publicado no SBES 2025 & 2026",
+          researchUrl:
+            "https://drive.google.com/file/d/1SQ5c2_XlFVYEGTERW3FSlOD4qIpctqsD/view?usp=sharing",
+          researchLabel: "Acessar Artigo Completo",
           skills: ["Java", "AST CheckStyle", "Test Smells", "Engenharia de Software"],
         },
         {
@@ -208,6 +235,7 @@ export const portfolioContent: Record<Language, PortfolioContent> = {
       sectionTag: "03 // Portfólio de Código",
       title: "Projetos em Destaque",
       viewSource: "Acessar Código Fonte",
+      viewResearch: "Acessar Artigo / Pesquisa",
       projects: [
         {
           id: "arieslinter",
@@ -225,6 +253,9 @@ export const portfolioContent: Record<Language, PortfolioContent> = {
             "Open Source",
           ],
           githubUrl: "https://github.com/viRafael/arieslinter",
+          researchUrl:
+            "https://drive.google.com/file/d/1SQ5c2_XlFVYEGTERW3FSlOD4qIpctqsD/view?usp=sharing",
+          researchLabel: "Artigo da Pesquisa",
           icon: "bug",
           featured: true,
           colSpanDesktop: "col-span-7",
@@ -281,6 +312,7 @@ export const portfolioContent: Record<Language, PortfolioContent> = {
     footer: {
       builtWith: "Desenvolvido com precisão & Kinetic Syntax.",
       backToTop: "Voltar ao topo",
+      researchLabel: "Artigo / Pesquisa",
     },
   },
 
@@ -302,6 +334,8 @@ export const portfolioContent: Record<Language, PortfolioContent> = {
       email: "contato@rafaelvieira.dev",
       github: "https://github.com/viRafael",
       linkedin: "https://linkedin.com/in/rafael-vieiraa",
+      researchUrl:
+        "https://drive.google.com/file/d/1SQ5c2_XlFVYEGTERW3FSlOD4qIpctqsD/view?usp=sharing",
       ctaProjects: "View projects",
       ctaContact: "Get in touch",
       resumes: {
@@ -322,7 +356,7 @@ export const portfolioContent: Record<Language, PortfolioContent> = {
       path: "~$",
       interactiveLabel: "Interactive",
       shortcutsLabel: "Shortcuts:",
-      placeholder: "type 'help' or click shortcuts...",
+      placeholder: "type 'help' or click in shortcuts...",
       commands: {
         "cat current_interests.txt": [
           "> NestJS",
@@ -340,7 +374,8 @@ export const portfolioContent: Record<Language, PortfolioContent> = {
         ],
         "cat research.txt": [
           "Aries Lab (CNPq PIBIC) - Test Smells & AST Static Analysis Investigation",
-          "Paper accepted/published at SBES 2025 & 2026",
+          "Paper accepted at CBSoft / SBES (Tools Session)",
+          "Full paper: https://drive.google.com/file/d/1SQ5c2_XlFVYEGTERW3FSlOD4qIpctqsD/view?usp=sharing",
         ],
         "help": [
           "Available commands: cat current_interests.txt, whoami, cat research.txt, cat education.txt, clear",
@@ -360,8 +395,16 @@ export const portfolioContent: Record<Language, PortfolioContent> = {
       ],
       highlights: [
         { label: "Degree", value: "Information Systems (UFBA)" },
-        { label: "Research", value: "Aries Lab (CNPq PIBIC)" },
-        { label: "Scientific Output", value: "Publication at SBES 2025 & 2026" },
+        {
+          label: "Research",
+          value: "Aries Lab (CNPq PIBIC)",
+          href: "https://drive.google.com/file/d/1SQ5c2_XlFVYEGTERW3FSlOD4qIpctqsD/view?usp=sharing",
+        },
+        {
+          label: "Scientific Output",
+          value: "Publication at SBES 2025 & 2026",
+          href: "https://drive.google.com/file/d/1SQ5c2_XlFVYEGTERW3FSlOD4qIpctqsD/view?usp=sharing",
+        },
         { label: "Leadership", value: "Commercial Director at TITAN" },
       ],
     },
@@ -378,6 +421,9 @@ export const portfolioContent: Record<Language, PortfolioContent> = {
           description:
             "Development of AriesLinter (Java/CheckStyle) focused on automated detection of test smells in open-source projects. This research directly contributes to continuous software quality, maintainability, and test suite reliability.",
           badge: "Published at SBES 2025 & 2026",
+          researchUrl:
+            "https://drive.google.com/file/d/1SQ5c2_XlFVYEGTERW3FSlOD4qIpctqsD/view?usp=sharing",
+          researchLabel: "Read Research Paper",
           skills: ["Java", "AST CheckStyle", "Test Smells", "Software Engineering"],
         },
         {
@@ -396,6 +442,7 @@ export const portfolioContent: Record<Language, PortfolioContent> = {
       sectionTag: "03 // Code Portfolio",
       title: "Featured Projects",
       viewSource: "View Source Code",
+      viewResearch: "Read Paper / Research",
       projects: [
         {
           id: "arieslinter",
@@ -413,6 +460,9 @@ export const portfolioContent: Record<Language, PortfolioContent> = {
             "Open Source",
           ],
           githubUrl: "https://github.com/viRafael/arieslinter",
+          researchUrl:
+            "https://drive.google.com/file/d/1SQ5c2_XlFVYEGTERW3FSlOD4qIpctqsD/view?usp=sharing",
+          researchLabel: "Research Paper",
           icon: "bug",
           featured: true,
           colSpanDesktop: "col-span-7",
@@ -469,6 +519,7 @@ export const portfolioContent: Record<Language, PortfolioContent> = {
     footer: {
       builtWith: "Built with precision & Kinetic Syntax.",
       backToTop: "Back to top",
+      researchLabel: "Research Paper",
     },
   },
 };

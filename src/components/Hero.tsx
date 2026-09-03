@@ -15,9 +15,9 @@ export function Hero() {
       id="hero"
       className="min-h-[calc(76vh-5rem)] flex flex-col justify-center py-12 md:py-16 border-b border-outline"
     >
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center w-full my-auto">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center w-full my-auto">
         {/* Left Column: Presentation */}
-        <div className="md:col-span-7 flex flex-col gap-6">
+        <div className="lg:col-span-7 flex flex-col gap-6">
           <div>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-on-background mb-3">
               {t.personal.name}
@@ -59,8 +59,8 @@ export function Hero() {
             </a>
           </div>
 
-          {/* Social Links */}
-          <div className="flex items-center gap-5 pt-2">
+          {/* Social & Research Links */}
+          <div className="flex flex-wrap items-center gap-4 sm:gap-5 pt-2">
             <a
               href={t.personal.github}
               target="_blank"
@@ -96,11 +96,12 @@ export function Hero() {
               </svg>
               <span className="hidden sm:inline">linkedin/rafael-vieiraa</span>
             </a>
+
           </div>
         </div>
 
         {/* Right Column: Terminal Visual */}
-        <div className="md:col-span-5 w-full">
+        <div className="lg:col-span-5 w-full">
           <Terminal />
         </div>
       </div>
