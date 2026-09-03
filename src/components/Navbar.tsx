@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, FileText, ArrowRight } from "lucide-react";
+import { Menu, X, FileText, ArrowRight, ChevronDown, Download } from "lucide-react";
 import { portfolioData } from "@/data/portfolio";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [resumeDropdown, setResumeDropdown] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const navLinks = [
     { label: "About", href: "#sobre" },
@@ -14,6 +16,17 @@ export function Navbar() {
     { label: "Projects", href: "#projetos" },
     { label: "Skills", href: "#skills" },
   ];
+
+  // Fecha dropdown ao clicar fora
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setResumeDropdown(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-[#0B0B0C]/85 backdrop-blur-md border-b border-outline">
@@ -40,15 +53,65 @@ export function Navbar() {
           ))}
         </nav>
 
-        {/* Desktop CTA */}
-        <div className="hidden md:flex items-center gap-4">
-          <a
-            href={portfolioData.personal.resumeUrl}
-            className="font-mono text-xs font-semibold uppercase tracking-widest bg-primary text-on-primary px-5 py-2.5 hover:bg-[#ffb95f] transition-colors flex items-center gap-2"
+        {/* Desktop CTA with Language Dropdown */}
+        <div ref={dropdownRef} className="hidden md:block relative">
+          <button
+            type="button"
+            onClick={() => setResumeDropdown(!resumeDropdown)}
+            className="font-mono text-xs font-semibold uppercase tracking-widest bg-primary text-on-primary px-4 py-2.5 hover:bg-[#ffb95f] transition-colors flex items-center gap-2"
           >
             <FileText className="w-3.5 h-3.5" />
             <span>Resume</span>
-          </a>
+            <ChevronDown
+              className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                resumeDropdown ? "rotate-180" : ""
+              }`}
+            />
+          </button>
+
+          {resumeDropdown && (
+            <div className="absolute right-0 top-full mt-2 w-52 bg-surface border border-outline shadow-2xl py-1 z-50 animate-in fade-in slide-in-from-top-1">
+              <div className="px-3 py-1.5 text-[10px] font-mono uppercase tracking-widest text-on-surface-variant/60 border-b border-outline/40">
+                Selecione o idioma:
+              </div>
+
+              {/* Opção Português */}
+              <a
+                href={portfolioData.personal.resumes.pt.url}
+                download={portfolioData.personal.resumes.pt.filename}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setResumeDropdown(false)}
+                className="flex items-center justify-between px-3.5 py-2.5 text-xs font-mono text-on-surface-variant hover:text-primary hover:bg-surface-variant transition-colors border-b border-outline/30 group"
+              >
+                <div className="flex items-center gap-2">
+                  <span className="text-[11px] font-bold text-primary px-1 border border-primary/40 bg-primary/10">
+                    PT
+                  </span>
+                  <span>Português</span>
+                </div>
+                <Download className="w-3.5 h-3.5 text-on-surface-variant/60 group-hover:text-primary" />
+              </a>
+
+              {/* Opção Inglês */}
+              <a
+                href={portfolioData.personal.resumes.en.url}
+                download={portfolioData.personal.resumes.en.filename}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setResumeDropdown(false)}
+                className="flex items-center justify-between px-3.5 py-2.5 text-xs font-mono text-on-surface-variant hover:text-primary hover:bg-surface-variant transition-colors group"
+              >
+                <div className="flex items-center gap-2">
+                  <span className="text-[11px] font-bold text-primary px-1 border border-primary/40 bg-primary/10">
+                    EN
+                  </span>
+                  <span>English</span>
+                </div>
+                <Download className="w-3.5 h-3.5 text-on-surface-variant/60 group-hover:text-primary" />
+              </a>
+            </div>
+          )}
         </div>
 
         {/* Mobile Hamburger Button */}
@@ -76,14 +139,38 @@ export function Navbar() {
               <ArrowRight className="w-4 h-4 text-primary" />
             </Link>
           ))}
-          <a
-            href={portfolioData.personal.resumeUrl}
-            onClick={() => setIsOpen(false)}
-            className="mt-2 font-mono text-xs font-semibold uppercase tracking-widest bg-primary text-on-primary py-3 text-center flex items-center justify-center gap-2 hover:bg-[#ffb95f]"
-          >
-            <FileText className="w-4 h-4" />
-            <span>Resume</span>
-          </a>
+
+          {/* Opções de download no mobile */}
+          <div className="mt-2 pt-2 border-t border-outline/50 flex flex-col gap-2">
+            <span className="font-mono text-[11px] text-on-surface-variant/70 uppercase tracking-wider">
+              Baixar Currículo / Resume:
+            </span>
+            <div className="grid grid-cols-2 gap-2.5">
+              <a
+                href={portfolioData.personal.resumes.pt.url}
+                download={portfolioData.personal.resumes.pt.filename}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsOpen(false)}
+                className="font-mono text-xs font-semibold uppercase tracking-wider bg-primary text-on-primary py-2.5 text-center flex items-center justify-center gap-1.5 hover:bg-[#ffb95f] transition-colors"
+              >
+                <Download className="w-3.5 h-3.5" />
+                <span>PT-BR</span>
+              </a>
+
+              <a
+                href={portfolioData.personal.resumes.en.url}
+                download={portfolioData.personal.resumes.en.filename}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsOpen(false)}
+                className="font-mono text-xs font-semibold uppercase tracking-wider border border-outline bg-surface-variant text-on-background py-2.5 text-center flex items-center justify-center gap-1.5 hover:border-primary hover:text-primary transition-colors"
+              >
+                <Download className="w-3.5 h-3.5" />
+                <span>EN-US</span>
+              </a>
+            </div>
+          </div>
         </div>
       )}
     </header>

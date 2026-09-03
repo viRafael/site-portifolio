@@ -39,7 +39,19 @@ export const portfolioData = {
     email: "contato@rafaelvieira.dev",
     github: "https://github.com/viRafael",
     linkedin: "https://linkedin.com/in/rafael-vieiraa",
-    resumeUrl: "mailto:contato@rafaelvieira.dev?subject=Solicita%C3%A7%C3%A3o%20de%20Curr%C3%ADculo%20-%20Rafael%20Vieira",
+    resumeUrl: "/curriculo-portugues.pdf",
+    resumes: {
+      pt: {
+        label: "Português",
+        url: "/curriculo-portugues.pdf",
+        filename: "Curriculo-Rafael-Vieira.pdf",
+      },
+      en: {
+        label: "English",
+        url: "/curriculo-ingles.pdf",
+        filename: "Resume-Rafael-Vieira.pdf",
+      },
+    },
   },
   terminal: {
     user: "rafael@dev",
