@@ -5,6 +5,7 @@ import { MapPin, ArrowDown, Mail } from "lucide-react";
 import { portfolioContent } from "@/data/portfolio";
 import { Terminal } from "@/components/Terminal";
 import { useLanguage } from "@/context/LanguageContext";
+import { HeroAnimation } from "@/components/HeroAnimation";
 
 export function Hero() {
   const { language } = useLanguage();
@@ -13,9 +14,9 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="min-h-[calc(76vh-5rem)] flex flex-col justify-center py-12 md:py-16 border-b border-outline"
+      className="min-h-[calc(76vh-5rem)] flex flex-col justify-center py-10 md:py-14 border-b border-outline relative overflow-hidden"
     >
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center w-full my-auto">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center w-full my-auto relative z-10">
         {/* Left Column: Presentation */}
         <div className="md:col-span-7 flex flex-col gap-6">
           <div>
@@ -104,6 +105,9 @@ export function Hero() {
           <Terminal />
         </div>
       </div>
+
+      {/* Interactive Physics & Stagger Animation (Liam Egan Strings & Anime.js) */}
+      <HeroAnimation />
     </section>
   );
 }
