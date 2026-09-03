@@ -1,17 +1,21 @@
-import { ExternalLink, Server, Bug, Building2 } from "lucide-react";
+import { ExternalLink, Server, Bug, Building2, Sparkles } from "lucide-react";
 import { portfolioData, Project } from "@/data/portfolio";
 
 export function Projects() {
   const renderIcon = (icon: Project["icon"]) => {
     switch (icon) {
-      case "api":
-        return <Server className="w-7 h-7 text-primary" />;
       case "bug":
         return <Bug className="w-7 h-7 text-primary" />;
+      case "api":
+        return <Server className="w-7 h-7 text-primary" />;
       case "building":
         return <Building2 className="w-7 h-7 text-primary" />;
     }
   };
+
+  const project1 = portfolioData.projects[0]; // AriesLinter (Principal)
+  const project2 = portfolioData.projects[1]; // API - Serviços
+  const project3 = portfolioData.projects[2]; // API - Coworking
 
   return (
     <section id="projetos" className="py-16 md:py-24 border-b border-outline">
@@ -27,81 +31,94 @@ export function Projects() {
 
       {/* Bento Grid Layout */}
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-        {/* Project 1 (Large - 8 cols) */}
-        {portfolioData.projects[0] && (
-          <div className="md:col-span-8 bg-surface border border-outline p-6 md:p-8 flex flex-col justify-between interactive-border group">
+        {/* Projeto 1: AriesLinter (Destaque Principal - 7 colunas) */}
+        {project1 && (
+          <div className="md:col-span-7 bg-surface border border-outline p-6 md:p-8 flex flex-col justify-between interactive-border group relative overflow-hidden">
             <div>
-              <div className="flex justify-between items-start mb-6">
+              <div className="flex justify-between items-start mb-4">
                 <div className="p-3 bg-surface-variant border border-outline group-hover:border-primary/50 transition-colors">
-                  {renderIcon(portfolioData.projects[0].icon)}
+                  {renderIcon(project1.icon)}
                 </div>
                 <a
-                  href={portfolioData.projects[0].githubUrl}
+                  href={project1.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`Ver repositório ${portfolioData.projects[0].title}`}
+                  aria-label={`Ver repositório ${project1.title}`}
+                  className="text-on-surface-variant hover:text-primary transition-colors p-2 border border-transparent hover:border-outline bg-surface-variant/40 flex items-center gap-1.5 font-mono text-xs"
+                >
+                  <span className="hidden sm:inline">github.com</span>
+                  <ExternalLink className="w-4 h-4" />
+                </a>
+              </div>
+
+              {/* Highlight Flag */}
+              {project1.highlightBadge && (
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 mb-3 text-[11px] font-mono font-semibold text-primary bg-primary/10 border border-primary/40">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>{project1.highlightBadge}</span>
+                </div>
+              )}
+
+              <div className="font-mono text-[11px] text-on-surface-variant/80 uppercase tracking-widest mb-1">
+                {project1.categoryTag}
+              </div>
+
+              <h3 className="text-2xl md:text-3xl font-semibold text-on-background mb-3 group-hover:text-primary transition-colors">
+                {project1.title}
+              </h3>
+
+              <p className="text-on-surface-variant text-base leading-relaxed mb-8">
+                {project1.description}
+              </p>
+            </div>
+
+            <div className="flex flex-wrap gap-2 pt-4 border-t border-outline/50">
+              {project1.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="px-2.5 py-1 font-mono text-xs tech-badge"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Projeto 2: API - Serviços (5 colunas) */}
+        {project2 && (
+          <div className="md:col-span-5 bg-surface border border-outline p-6 md:p-8 flex flex-col justify-between interactive-border group">
+            <div>
+              <div className="flex justify-between items-start mb-4">
+                <div className="p-3 bg-surface-variant border border-outline group-hover:border-primary/50 transition-colors">
+                  {renderIcon(project2.icon)}
+                </div>
+                <a
+                  href={project2.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Ver repositório ${project2.title}`}
                   className="text-on-surface-variant hover:text-primary transition-colors p-2 border border-transparent hover:border-outline bg-surface-variant/40"
                 >
-                  <ExternalLink className="w-5 h-5" />
+                  <ExternalLink className="w-4 h-4" />
                 </a>
               </div>
 
               <div className="inline-block font-mono text-[11px] text-primary/80 uppercase tracking-widest mb-1">
-                Backend Architecture // Microservices
-              </div>
-              <h3 className="text-2xl md:text-3xl font-semibold text-on-background mb-3 group-hover:text-primary transition-colors">
-                {portfolioData.projects[0].title}
-              </h3>
-              <p className="text-on-surface-variant text-base leading-relaxed mb-8">
-                {portfolioData.projects[0].description}
-              </p>
-            </div>
-
-            <div className="flex flex-wrap gap-2 pt-4 border-t border-outline/50">
-              {portfolioData.projects[0].tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="px-2.5 py-1 font-mono text-xs tech-badge"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Project 2 (Square - 4 cols) */}
-        {portfolioData.projects[1] && (
-          <div className="md:col-span-4 bg-surface border border-outline p-6 md:p-8 flex flex-col justify-between interactive-border group">
-            <div>
-              <div className="flex justify-between items-start mb-6">
-                <div className="p-3 bg-surface-variant border border-outline group-hover:border-primary/50 transition-colors">
-                  {renderIcon(portfolioData.projects[1].icon)}
-                </div>
-                <a
-                  href={portfolioData.projects[1].githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`Ver repositório ${portfolioData.projects[1].title}`}
-                  className="text-on-surface-variant hover:text-primary transition-colors p-2 border border-transparent hover:border-outline bg-surface-variant/40"
-                >
-                  <ExternalLink className="w-5 h-5" />
-                </a>
+                {project2.categoryTag}
               </div>
 
-              <div className="inline-block font-mono text-[11px] text-secondary uppercase tracking-widest mb-1">
-                Software Engineering // AST Research
-              </div>
               <h3 className="text-2xl font-semibold text-on-background mb-3 group-hover:text-primary transition-colors">
-                {portfolioData.projects[1].title}
+                {project2.title}
               </h3>
+
               <p className="text-on-surface-variant text-sm md:text-base leading-relaxed mb-8">
-                {portfolioData.projects[1].description}
+                {project2.description}
               </p>
             </div>
 
             <div className="flex flex-wrap gap-2 pt-4 border-t border-outline/50">
-              {portfolioData.projects[1].tags.map((tag) => (
+              {project2.tags.map((tag) => (
                 <span
                   key={tag}
                   className="px-2.5 py-1 font-mono text-xs tech-badge"
@@ -113,35 +130,35 @@ export function Projects() {
           </div>
         )}
 
-        {/* Project 3 (Wide - 12 cols) */}
-        {portfolioData.projects[2] && (
+        {/* Projeto 3: API - Coworking (12 colunas) */}
+        {project3 && (
           <div className="md:col-span-12 bg-surface border border-outline p-6 md:p-8 flex flex-col md:flex-row justify-between items-start md:items-center interactive-border group gap-6">
             <div className="flex-1">
               <div className="flex items-center gap-4 mb-3">
                 <div className="p-2.5 bg-surface-variant border border-outline group-hover:border-primary/50 transition-colors">
-                  {renderIcon(portfolioData.projects[2].icon)}
+                  {renderIcon(project3.icon)}
                 </div>
                 <div>
                   <div className="font-mono text-[11px] text-tertiary uppercase tracking-widest">
-                    Workspace Management System
+                    {project3.categoryTag}
                   </div>
                   <h3 className="text-2xl font-semibold text-on-background group-hover:text-primary transition-colors">
-                    {portfolioData.projects[2].title}
+                    {project3.title}
                   </h3>
                 </div>
               </div>
 
               <p className="text-on-surface-variant text-base leading-relaxed max-w-3xl">
-                {portfolioData.projects[2].description}
+                {project3.description}
               </p>
             </div>
 
             <div className="flex flex-col md:items-end gap-4 min-w-[240px] w-full md:w-auto pt-4 md:pt-0 border-t md:border-t-0 border-outline/50">
               <a
-                href={portfolioData.projects[2].githubUrl}
+                href={project3.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`Ver repositório ${portfolioData.projects[2].title}`}
+                aria-label={`Ver repositório ${project3.title}`}
                 className="text-on-surface-variant hover:text-primary transition-colors inline-flex items-center gap-2 font-mono text-xs"
               >
                 <span>Acessar Código Fonte</span>
@@ -149,7 +166,7 @@ export function Projects() {
               </a>
 
               <div className="flex flex-wrap gap-2 md:justify-end">
-                {portfolioData.projects[2].tags.map((tag) => (
+                {project3.tags.map((tag) => (
                   <span
                     key={tag}
                     className="px-2.5 py-1 font-mono text-xs tech-badge"

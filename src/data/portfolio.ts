@@ -1,13 +1,15 @@
 export interface Project {
   id: string;
   title: string;
+  categoryTag?: string;
+  highlightBadge?: string;
   description: string;
   tags: string[];
   githubUrl: string;
   demoUrl?: string;
   icon: "api" | "bug" | "building";
   featured: boolean;
-  colSpanDesktop: "col-span-8" | "col-span-4" | "col-span-12";
+  colSpanDesktop: "col-span-7" | "col-span-5" | "col-span-8" | "col-span-4" | "col-span-12";
 }
 
 export interface Experience {
@@ -30,7 +32,7 @@ export interface SkillCategory {
 export const portfolioData = {
   personal: {
     name: "Rafael Vieira",
-    role: "Backend Developer & Pesquisador em Engenharia de Software",
+    role: "Backend Developer",
     shortBio:
       "Graduando em Sistemas de Informação (UFBA), construindo APIs robustas e pesquisando qualidade de software.",
     location: "Salvador, BA",
@@ -59,7 +61,7 @@ export const portfolioData = {
       ],
       "cat research.txt": [
         "Aries Lab (CNPq PIBIC) - Investigação de Test Smells e Análise Estática",
-        "Artigo aceito/publicado no SBES 2025",
+        "Artigo aceito/publicado no SBES 2025 & 2026",
       ],
       "help": [
         "Comandos disponíveis: cat current_interests.txt, whoami, cat research.txt, cat education.txt, clear",
@@ -70,12 +72,12 @@ export const portfolioData = {
     title: "Sobre Mim",
     paragraphs: [
       "Sou graduando em Sistemas de Informação pela Universidade Federal da Bahia (UFBA), com foco no desenvolvimento de arquiteturas backend escaláveis, seguras e de alta performance. Minha expertise técnica concentra-se no ecossistema Node.js, especialmente com NestJS e TypeScript, criando APIs robustas preparadas para regras de negócio complexas.",
-      "Busco constantemente o equilíbrio entre o rigor acadêmico e a entrega de valor no mercado. Atuo como Pesquisador no Aries Lab, investigando qualidade de código e test smells através de análise estática de AST. Simultaneamente, atuo como Diretor Comercial na TITAN (Empresa Júnior da UFBA), conduzindo o escopo técnico e a viabilidade de projetos de software comerciais.",
+      "Busco constantemente o equilíbrio entre o rigor acadêmico e a entrega de valor no mercado. Atuo como Pesquisador no Aries Lab, investigando qualidade de código e test smells. Simultaneamente, atuo como Diretor Comercial na TITAN (Empresa Júnior da UFBA), conduzindo o escopo técnico e a viabilidade de projetos de software comerciais.",
     ],
     highlights: [
       { label: "Graduação", value: "Sistemas de Informação (UFBA)" },
       { label: "Pesquisa", value: "Aries Lab (CNPq PIBIC)" },
-      { label: "Produção Científica", value: "Publicação no SBES 2025" },
+      { label: "Produção Científica", value: "Publicação no SBES 2025 & 2026" },
       { label: "Liderança", value: "Diretoria Comercial na TITAN" },
     ],
   },
@@ -87,8 +89,8 @@ export const portfolioData = {
       period: "set/2024 – atual",
       current: true,
       description:
-        "Desenvolvimento do AriesLinter (Java/CheckStyle) focado na detecção de test smells em projetos open-source. A pesquisa contribui diretamente para a melhoria contínua da qualidade de software, manutenibilidade e confiabilidade de suítes de testes.",
-      badge: "Publicado no SBES 2025",
+        "Desenvolvimento do AriesLinter (Java/CheckStyle) focado na detecção de test smells em projetos opensource. A pesquisa contribui diretamente para a melhoria contínua da qualidade de software, manutenibilidade e confiabilidade de suítes de testes.",
+      badge: "Publicado no SBES 2025 & 2026",
       skills: ["Java", "AST CheckStyle", "Test Smells", "Engenharia de Software"],
     },
     {
@@ -99,35 +101,39 @@ export const portfolioData = {
       current: true,
       description:
         "Liderança da estratégia comercial e definição de escopo técnico para projetos de software sob medida. Atuação como interface técnica direta entre as necessidades de clientes reais e a arquitetura desenvolvida pelo time.",
-      skills: ["Escopo Técnico", "Viabilidade de Software", "Liderança", "B2B"],
+      skills: ["Escopo Técnico", "Viabilidade de Software", "Liderança", "Estratégia Comercial"],
     },
   ] as Experience[],
   projects: [
     {
+      id: "arieslinter",
+      title: "AriesLinter",
+      categoryTag: "Research & Software Engineering // AST Static Analysis",
+      highlightBadge: "SBES 2025 & 2026",
+      description:
+        "Ferramenta de análise estática construída sobre AST (Abstract Syntax Tree) com capacidade de detecção em tempo real — diretamente à medida que o código é escrito — dos 17 test smells mais frequentes e críticos da Engenharia de Software. Desenvolvida no âmbito da pesquisa no Aries Lab (CNPq PIBIC) com validação empírica para elevar a confiabilidade e manutenibilidade de testes em Java.",
+      tags: ["Java", "AST (CheckStyle)", "Detecção em Tempo Real", "17 Test Smells", "SBES 2025 & 2026", "Open Source"],
+      githubUrl: "https://github.com/viRafael/arieslinter",
+      icon: "bug",
+      featured: true,
+      colSpanDesktop: "col-span-7",
+    },
+    {
       id: "api-servicos",
       title: "API - Serviços",
+      categoryTag: "Backend Architecture // Microservices",
       description:
-        "Arquitetura backend completa para plataforma de serviços sob demanda. Implementa filas assíncronas de alta performance para processamento em background e integração financeira robusta com gateway de pagamentos.",
+        "Arquitetura backend completa para plataforma de serviços sob demanda. Implementa filas assíncronas de alta performance para processamento em background e integração financeira robusta com gateway de pagamentos Stripe.",
       tags: ["NestJS", "Prisma", "PostgreSQL", "Redis", "Bull", "Stripe"],
       githubUrl: "https://github.com/viRafael/API-Servicos",
       icon: "api",
       featured: true,
-      colSpanDesktop: "col-span-8",
-    },
-    {
-      id: "arieslinter",
-      title: "AriesLinter",
-      description:
-        "Ferramenta de análise estática construída sobre AST (Abstract Syntax Tree) para detecção automatizada de anomalias (test smells) em código de testes Java.",
-      tags: ["Java", "AST (CheckStyle)", "Análise Estática", "SBES 2025"],
-      githubUrl: "https://github.com/viRafael/arieslinter",
-      icon: "bug",
-      featured: true,
-      colSpanDesktop: "col-span-4",
+      colSpanDesktop: "col-span-5",
     },
     {
       id: "api-coworking",
       title: "API - Coworking",
+      categoryTag: "Workspace Management System",
       description:
         "Sistema escalável de gerenciamento para espaços de coworking, lidando com controle de reservas de mesas e salas de reunião, autenticação segura e planos de acesso.",
       tags: ["NestJS", "Prisma", "PostgreSQL", "Docker", "REST API"],

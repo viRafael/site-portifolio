@@ -12,12 +12,6 @@ export function Hero() {
       {/* Left Column: Presentation */}
       <div className="md:col-span-7 flex flex-col gap-6">
         <div>
-          {/* Status Indicator */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 border border-outline bg-surface mb-6 font-mono text-xs text-on-surface-variant">
-            <span className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
-            <span>Disponível para novos desafios backend &amp; pesquisa</span>
-          </div>
-
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-on-background mb-3">
             {portfolioData.personal.name}
           </h1>
