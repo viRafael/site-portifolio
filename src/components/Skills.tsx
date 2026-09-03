@@ -1,7 +1,13 @@
+"use client";
+
 import { Code2, Server, Wrench } from "lucide-react";
-import { portfolioData, SkillCategory } from "@/data/portfolio";
+import { portfolioContent, SkillCategory } from "@/data/portfolio";
+import { useLanguage } from "@/context/LanguageContext";
 
 export function Skills() {
+  const { language } = useLanguage();
+  const t = portfolioContent[language];
+
   const getCategoryIcon = (icon: SkillCategory["icon"]) => {
     switch (icon) {
       case "code":
@@ -17,16 +23,16 @@ export function Skills() {
     <section id="skills" className="py-16 md:py-24 border-b border-outline">
       <div className="mb-12">
         <span className="font-mono text-xs uppercase tracking-widest text-primary mb-2 block">
-          04 // Competências
+          {t.skillsSection.sectionTag}
         </span>
         <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-on-background mb-3">
-          Core Skills
+          {t.skillsSection.title}
         </h2>
         <div className="w-12 h-1 bg-primary" />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {portfolioData.skillCategories.map((category) => (
+        {t.skillsSection.categories.map((category) => (
           <div
             key={category.title}
             className="border border-outline p-6 md:p-8 bg-surface interactive-border flex flex-col justify-between"
@@ -58,8 +64,8 @@ export function Skills() {
 
             {/* Bottom terminal accent indicator */}
             <div className="mt-8 pt-3 border-t border-outline/40 flex justify-between items-center text-[10px] font-mono text-on-surface-variant/60">
-              <span>ACTIVE STACK</span>
-              <span className="text-primary font-bold">100% READY</span>
+              <span>{t.skillsSection.activeStack}</span>
+              <span className="text-primary font-bold">{t.skillsSection.readyStatus}</span>
             </div>
           </div>
         ))}

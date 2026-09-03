@@ -1,13 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { portfolioData } from "@/data/portfolio";
+import { portfolioContent } from "@/data/portfolio";
+import { useLanguage } from "@/context/LanguageContext";
 
 export function Terminal() {
+  const { language } = useLanguage();
+  const t = portfolioContent[language];
+
   const [history, setHistory] = useState<Array<{ command: string; output: string[] }>>([
     {
       command: "cat current_interests.txt",
-      output: portfolioData.terminal.commands["cat current_interests.txt"],
+      output: t.terminal.commands["cat current_interests.txt"],
     },
   ]);
   const [inputVal, setInputVal] = useState("");
@@ -22,10 +26,12 @@ export function Terminal() {
       return;
     }
 
-    const availableCommands = portfolioData.terminal.commands as Record<string, string[]>;
+    const availableCommands = t.terminal.commands as Record<string, string[]>;
     const output =
       availableCommands[trimmed] || [
-        `bash: command not found: ${trimmed}. Digite 'help' para listar comandos disponíveis.`,
+        language === "pt"
+          ? `bash: comando não encontrado: ${trimmed}. Digite 'help' para listar comandos disponíveis.`
+          : `bash: command not found: ${trimmed}. Type 'help' to list available commands.`,
       ];
 
     setHistory((prev) => [...prev, { command: trimmed, output }]);
@@ -51,7 +57,7 @@ export function Terminal() {
           </span>
         </div>
         <span className="text-[10px] text-primary/80 uppercase tracking-widest hidden sm:inline">
-          Interactive
+          {t.terminal.interactiveLabel}
         </span>
       </div>
 
@@ -61,7 +67,7 @@ export function Terminal() {
           <div key={idx} className="space-y-1.5">
             <div className="flex items-center gap-2">
               <span className="text-primary font-semibold">
-                {portfolioData.terminal.user}:{portfolioData.terminal.path}
+                {t.terminal.user}:{t.terminal.path}
               </span>
               <span className="text-on-background">{item.command}</span>
             </div>
@@ -78,15 +84,15 @@ export function Terminal() {
         {/* Active Command Prompt */}
         <div className="flex items-center gap-2 pt-1">
           <span className="text-primary font-semibold whitespace-nowrap">
-            {portfolioData.terminal.user}:{portfolioData.terminal.path}
+            {t.terminal.user}:{t.terminal.path}
           </span>
           <input
             type="text"
             value={inputVal}
             onChange={(e) => setInputVal(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="digite 'help' ou clique abaixo..."
-            aria-label="Comando de terminal"
+            placeholder={t.terminal.placeholder}
+            aria-label={language === "pt" ? "Comando de terminal" : "Terminal command"}
             className="flex-1 bg-transparent border-none outline-none text-on-background text-xs md:text-sm placeholder:text-on-surface-variant/40"
           />
           <span className="terminal-cursor" />
@@ -95,8 +101,8 @@ export function Terminal() {
 
       {/* Quick Action Commands (Chips) */}
       <div className="mt-4 pt-3 border-t border-outline/50 flex flex-wrap items-center gap-1.5 text-[11px]">
-        <span className="text-on-surface-variant/60 mr-1 select-none">Atalhos:</span>
-        {Object.keys(portfolioData.terminal.commands).map((cmd) => (
+        <span className="text-on-surface-variant/60 mr-1 select-none">{t.terminal.shortcutsLabel}</span>
+        {Object.keys(t.terminal.commands).map((cmd) => (
           <button
             key={cmd}
             type="button"

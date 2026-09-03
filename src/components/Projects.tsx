@@ -1,7 +1,13 @@
+"use client";
+
 import { ExternalLink, Server, Bug, Building2, Sparkles } from "lucide-react";
-import { portfolioData, Project } from "@/data/portfolio";
+import { portfolioContent, Project } from "@/data/portfolio";
+import { useLanguage } from "@/context/LanguageContext";
 
 export function Projects() {
+  const { language } = useLanguage();
+  const t = portfolioContent[language];
+
   const renderIcon = (icon: Project["icon"]) => {
     switch (icon) {
       case "bug":
@@ -13,18 +19,18 @@ export function Projects() {
     }
   };
 
-  const project1 = portfolioData.projects[0]; // AriesLinter (Principal)
-  const project2 = portfolioData.projects[1]; // API - Serviços
-  const project3 = portfolioData.projects[2]; // API - Coworking
+  const project1 = t.projectsSection.projects[0];
+  const project2 = t.projectsSection.projects[1];
+  const project3 = t.projectsSection.projects[2];
 
   return (
     <section id="projetos" className="py-16 md:py-24 border-b border-outline">
       <div className="mb-12">
         <span className="font-mono text-xs uppercase tracking-widest text-primary mb-2 block">
-          03 // Portfólio de Código
+          {t.projectsSection.sectionTag}
         </span>
         <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-on-background mb-3">
-          Projetos em Destaque
+          {t.projectsSection.title}
         </h2>
         <div className="w-12 h-1 bg-primary" />
       </div>
@@ -43,7 +49,7 @@ export function Projects() {
                   href={project1.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`Ver repositório ${project1.title}`}
+                  aria-label={`${language === "pt" ? "Ver repositório" : "View repository"} ${project1.title}`}
                   className="text-on-surface-variant hover:text-primary transition-colors p-2 border border-transparent hover:border-outline bg-surface-variant/40 flex items-center gap-1.5 font-mono text-xs"
                 >
                   <span className="hidden sm:inline">github.com</span>
@@ -97,7 +103,7 @@ export function Projects() {
                   href={project2.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`Ver repositório ${project2.title}`}
+                  aria-label={`${language === "pt" ? "Ver repositório" : "View repository"} ${project2.title}`}
                   className="text-on-surface-variant hover:text-primary transition-colors p-2 border border-transparent hover:border-outline bg-surface-variant/40"
                 >
                   <ExternalLink className="w-4 h-4" />
@@ -158,10 +164,10 @@ export function Projects() {
                 href={project3.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`Ver repositório ${project3.title}`}
+                aria-label={`${language === "pt" ? "Ver repositório" : "View repository"} ${project3.title}`}
                 className="text-on-surface-variant hover:text-primary transition-colors inline-flex items-center gap-2 font-mono text-xs"
               >
-                <span>Acessar Código Fonte</span>
+                <span>{t.projectsSection.viewSource}</span>
                 <ExternalLink className="w-4 h-4" />
               </a>
 

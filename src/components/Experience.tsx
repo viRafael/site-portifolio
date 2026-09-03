@@ -1,22 +1,28 @@
-import { portfolioData } from "@/data/portfolio";
+"use client";
+
 import { Sparkles } from "lucide-react";
+import { portfolioContent } from "@/data/portfolio";
+import { useLanguage } from "@/context/LanguageContext";
 
 export function Experience() {
+  const { language } = useLanguage();
+  const t = portfolioContent[language];
+
   return (
     <section id="experiencia" className="py-16 md:py-24 border-b border-outline">
       <div className="mb-12">
         <span className="font-mono text-xs uppercase tracking-widest text-primary mb-2 block">
-          02 // Trajetória
+          {t.experienceSection.sectionTag}
         </span>
         <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-on-background mb-3">
-          Experiência
+          {t.experienceSection.title}
         </h2>
         <div className="w-12 h-1 bg-primary" />
       </div>
 
       {/* Timeline Container */}
       <div className="relative border-l border-outline ml-4 md:ml-6 pl-8 pb-4 flex flex-col gap-12">
-        {portfolioData.experiences.map((exp) => (
+        {t.experienceSection.experiences.map((exp) => (
           <div key={exp.id} className="relative group">
             {/* Timeline Node */}
             <div

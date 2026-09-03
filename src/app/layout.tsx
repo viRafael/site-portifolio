@@ -14,6 +14,8 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+import { LanguageProvider } from "@/context/LanguageContext";
+
 export const viewport: Viewport = {
   themeColor: "#0B0B0C",
   colorScheme: "dark",
@@ -72,7 +74,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${jetbrainsMono.variable} scroll-smooth dark`}
     >
       <body className="min-h-screen bg-background text-on-background antialiased selection:bg-primary selection:text-on-primary">
-        {children}
+        <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>
   );

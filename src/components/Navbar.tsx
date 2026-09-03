@@ -1,32 +1,23 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
-import { Menu, X, FileText, ArrowRight, ChevronDown, Download } from "lucide-react";
-import { portfolioData } from "@/data/portfolio";
+import { Menu, X, FileText, ArrowRight, Download, Globe } from "lucide-react";
+import { portfolioContent } from "@/data/portfolio";
+import { useLanguage } from "@/context/LanguageContext";
 
 export function Navbar() {
+  const { language, setLanguage } = useLanguage();
+  const t = portfolioContent[language];
+
   const [isOpen, setIsOpen] = useState(false);
-  const [resumeDropdown, setResumeDropdown] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const navLinks = [
-    { label: "About", href: "#sobre" },
-    { label: "Experience", href: "#experiencia" },
-    { label: "Projects", href: "#projetos" },
-    { label: "Skills", href: "#skills" },
+    { label: t.nav.about, href: "#sobre" },
+    { label: t.nav.experience, href: "#experiencia" },
+    { label: t.nav.projects, href: "#projetos" },
+    { label: t.nav.skills, href: "#skills" },
   ];
-
-  // Fecha dropdown ao clicar fora
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setResumeDropdown(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-[#0B0B0C]/85 backdrop-blur-md border-b border-outline">
@@ -53,65 +44,50 @@ export function Navbar() {
           ))}
         </nav>
 
-        {/* Desktop CTA with Language Dropdown */}
-        <div ref={dropdownRef} className="hidden md:block relative">
-          <button
-            type="button"
-            onClick={() => setResumeDropdown(!resumeDropdown)}
+        {/* Desktop Actions: Language Toggle & Resume Dropdown */}
+        <div className="hidden md:flex items-center gap-3">
+          {/* Language Toggle */}
+          <div className="relative flex items-center border border-outline bg-surface interactive-border">
+            <span
+              className={`absolute top-0 h-full bg-primary transition-all duration-300 ease-in-out ${
+                language === "pt" ? "left-0 w-1/2" : "left-1/2 w-1/2"
+              }`}
+            />
+            <button
+              type="button"
+              onClick={() => setLanguage("pt")}
+              aria-label="Mudar para Português"
+              className={`relative z-10 font-mono text-[10px] font-semibold px-2 py-1.5 transition-colors duration-300 ${
+                language === "pt" ? "text-on-primary" : "text-on-surface-variant/60 hover:text-on-surface-variant"
+              }`}
+            >
+              PT
+            </button>
+            <span className="text-outline/40 text-[10px] select-none relative z-10">/</span>
+            <button
+              type="button"
+              onClick={() => setLanguage("en")}
+              aria-label="Switch to English"
+              className={`relative z-10 font-mono text-[10px] font-semibold px-2 py-1.5 transition-colors duration-300 ${
+                language === "en" ? "text-on-primary" : "text-on-surface-variant/60 hover:text-on-surface-variant"
+              }`}
+            >
+              EN
+            </button>
+          </div>
+
+          {/* Resume Download */}
+          <a
+            href={t.personal.resumes[language].url}
+            download={t.personal.resumes[language].filename}
+            target="_blank"
+            rel="noopener noreferrer"
             className="font-mono text-xs font-semibold uppercase tracking-widest bg-primary text-on-primary px-4 py-2.5 hover:bg-[#ffb95f] transition-colors flex items-center gap-2"
           >
             <FileText className="w-3.5 h-3.5" />
-            <span>Resume</span>
-            <ChevronDown
-              className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                resumeDropdown ? "rotate-180" : ""
-              }`}
-            />
-          </button>
-
-          {resumeDropdown && (
-            <div className="absolute right-0 top-full mt-2 w-52 bg-surface border border-outline shadow-2xl py-1 z-50 animate-in fade-in slide-in-from-top-1">
-              <div className="px-3 py-1.5 text-[10px] font-mono uppercase tracking-widest text-on-surface-variant/60 border-b border-outline/40">
-                Selecione o idioma:
-              </div>
-
-              {/* Opção Português */}
-              <a
-                href={portfolioData.personal.resumes.pt.url}
-                download={portfolioData.personal.resumes.pt.filename}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setResumeDropdown(false)}
-                className="flex items-center justify-between px-3.5 py-2.5 text-xs font-mono text-on-surface-variant hover:text-primary hover:bg-surface-variant transition-colors border-b border-outline/30 group"
-              >
-                <div className="flex items-center gap-2">
-                  <span className="text-[11px] font-bold text-primary px-1 border border-primary/40 bg-primary/10">
-                    PT
-                  </span>
-                  <span>Português</span>
-                </div>
-                <Download className="w-3.5 h-3.5 text-on-surface-variant/60 group-hover:text-primary" />
-              </a>
-
-              {/* Opção Inglês */}
-              <a
-                href={portfolioData.personal.resumes.en.url}
-                download={portfolioData.personal.resumes.en.filename}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setResumeDropdown(false)}
-                className="flex items-center justify-between px-3.5 py-2.5 text-xs font-mono text-on-surface-variant hover:text-primary hover:bg-surface-variant transition-colors group"
-              >
-                <div className="flex items-center gap-2">
-                  <span className="text-[11px] font-bold text-primary px-1 border border-primary/40 bg-primary/10">
-                    EN
-                  </span>
-                  <span>English</span>
-                </div>
-                <Download className="w-3.5 h-3.5 text-on-surface-variant/60 group-hover:text-primary" />
-              </a>
-            </div>
-          )}
+            <span>{t.nav.resume}</span>
+            <Download className="w-3.5 h-3.5" />
+          </a>
         </div>
 
         {/* Mobile Hamburger Button */}
@@ -128,6 +104,40 @@ export function Navbar() {
       {/* Mobile Menu Dropdown */}
       {isOpen && (
         <div className="md:hidden bg-surface border-b border-outline px-6 py-6 flex flex-col gap-4 animate-in fade-in slide-in-from-top-2">
+          {/* Mobile Language Toggle */}
+          <div className="flex items-center justify-between pb-3 border-b border-outline/40">
+            <span className="font-mono text-xs text-on-surface-variant flex items-center gap-2">
+              <Globe className="w-4 h-4 text-primary" />
+              <span>Idioma / Language:</span>
+            </span>
+            <div className="relative flex font-mono text-xs font-semibold border border-outline">
+              <span
+                className={`absolute top-0 h-full bg-primary transition-all duration-300 ease-in-out ${
+                  language === "pt" ? "left-0 w-1/2" : "left-1/2 w-1/2"
+                }`}
+              />
+              <button
+                type="button"
+                onClick={() => setLanguage("pt")}
+                className={`relative z-10 px-3 py-1 transition-colors duration-300 ${
+                  language === "pt" ? "text-on-primary" : "text-on-surface-variant"
+                }`}
+              >
+                PT
+              </button>
+              <button
+                type="button"
+                onClick={() => setLanguage("en")}
+                className={`relative z-10 px-3 py-1 transition-colors duration-300 ${
+                  language === "en" ? "text-on-primary" : "text-on-surface-variant"
+                }`}
+              >
+                EN
+              </button>
+            </div>
+          </div>
+
+          {/* Navigation Links */}
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -140,37 +150,18 @@ export function Navbar() {
             </Link>
           ))}
 
-          {/* Opções de download no mobile */}
-          <div className="mt-2 pt-2 border-t border-outline/50 flex flex-col gap-2">
-            <span className="font-mono text-[11px] text-on-surface-variant/70 uppercase tracking-wider">
-              Baixar Currículo / Resume:
-            </span>
-            <div className="grid grid-cols-2 gap-2.5">
-              <a
-                href={portfolioData.personal.resumes.pt.url}
-                download={portfolioData.personal.resumes.pt.filename}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setIsOpen(false)}
-                className="font-mono text-xs font-semibold uppercase tracking-wider bg-primary text-on-primary py-2.5 text-center flex items-center justify-center gap-1.5 hover:bg-[#ffb95f] transition-colors"
-              >
-                <Download className="w-3.5 h-3.5" />
-                <span>PT-BR</span>
-              </a>
-
-              <a
-                href={portfolioData.personal.resumes.en.url}
-                download={portfolioData.personal.resumes.en.filename}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setIsOpen(false)}
-                className="font-mono text-xs font-semibold uppercase tracking-wider border border-outline bg-surface-variant text-on-background py-2.5 text-center flex items-center justify-center gap-1.5 hover:border-primary hover:text-primary transition-colors"
-              >
-                <Download className="w-3.5 h-3.5" />
-                <span>EN-US</span>
-              </a>
-            </div>
-          </div>
+          {/* Download Currículo */}
+          <a
+            href={t.personal.resumes[language].url}
+            download={t.personal.resumes[language].filename}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setIsOpen(false)}
+            className="font-mono text-xs font-semibold uppercase tracking-wider bg-primary text-on-primary py-2.5 text-center flex items-center justify-center gap-1.5 hover:bg-[#ffb95f] transition-colors"
+          >
+            <Download className="w-3.5 h-3.5" />
+            <span>{t.nav.resume}</span>
+          </a>
         </div>
       )}
     </header>
