@@ -181,7 +181,7 @@ export const portfolioContent: Record<Language, PortfolioContent> = {
       subtitle:
         "Arquitetura de sistemas distribuídos, rigor acadêmico e desenvolvimento backend orientado a domínio.",
       quote:
-        "Código de qualidade não é apenas sobre funcionar hoje, mas sobre permanecer compreensível, testável e manutenível no longo prazo.",
+        "Uma pessoa inteligente e insensata é uma das coisas mais assustadoras que há.",
       paragraphs: [
         "Sou graduando em Sistemas de Informação pela Universidade Federal da Bahia (UFBA), com foco no desenvolvimento de arquiteturas backend escaláveis, seguras e de alta performance. Minha expertise técnica concentra-se no ecossistema Node.js, especialmente com NestJS e TypeScript, criando APIs robustas preparadas para regras de negócio complexas.",
         "Busco constantemente o equilíbrio entre o rigor acadêmico e a entrega de valor no mercado. Atuo como Pesquisador no Aries Lab, investigando qualidade de código e test smells através de análise estática de AST. Simultaneamente, atuo como Diretor Comercial na TITAN (Empresa Júnior da UFBA), conduzindo o escopo técnico e a viabilidade de projetos de software comerciais.",
@@ -388,7 +388,7 @@ export const portfolioContent: Record<Language, PortfolioContent> = {
       subtitle:
         "Distributed systems architecture, academic rigor, and domain-driven backend engineering.",
       quote:
-        "Quality code is not just about working today, but staying understandable, testable, and maintainable in the long run.",
+        "An intelligent, foolish person is one of the most frightening things there is.",
       paragraphs: [
         "I am an Information Systems undergraduate at the Federal University of Bahia (UFBA), focused on engineering scalable, secure, and high-performance backend architectures. My technical expertise centers on the Node.js ecosystem, particularly with NestJS and TypeScript, building robust APIs designed for complex business rules.",
         "I continuously strive for balance between academic rigor and practical industry impact. As a Scientific Researcher at Aries Lab, I investigate code quality and test smells through AST static analysis. Concurrently, I serve as Commercial Director at TITAN (UFBA Junior Enterprise), leading technical scoping and project feasibility for custom software solutions.",

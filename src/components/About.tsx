@@ -92,6 +92,11 @@ export function About() {
           {/* Quote / Architectural Principle */}
           <div className="mt-4 p-4 border-l-2 border-primary bg-surface/60 font-mono text-xs md:text-sm text-on-background/90">
             <span className="text-primary font-bold">&gt;&gt;</span> &ldquo;{t.about.quote}&rdquo;
+            <div className="mt-2 text-on-surface-variant/70 text-[11px] md:text-xs">
+              — Kvothe,{" "}
+              <em>{language === "pt" ? "O Nome do Vento" : "The Name of the Wind"}</em>{" "}
+              (Patrick Rothfuss)
+            </div>
           </div>
         </div>
       </div>
