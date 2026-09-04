@@ -59,7 +59,12 @@ export const metadata: Metadata = {
       "Graduando em Sistemas de Informação (UFBA), construindo APIs robustas e pesquisando qualidade de software.",
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      {
+        url: "/favicon.svg",
+        type: "image/svg+xml",
+      },
+    ],
   },
 };
 

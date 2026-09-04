@@ -45,24 +45,55 @@ export function Projects() {
                 <div className="p-3 bg-surface-variant border border-outline group-hover:border-primary/50 transition-colors">
                   {renderIcon(project1.icon)}
                 </div>
-                <a
-                  href={project1.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`${language === "pt" ? "Ver repositório" : "View repository"} ${project1.title}`}
-                  className="text-on-surface-variant hover:text-primary transition-colors p-2 border border-transparent hover:border-outline bg-surface-variant/40 flex items-center gap-1.5 font-mono text-xs"
-                >
-                  <span className="hidden sm:inline">github.com</span>
-                  <ExternalLink className="w-4 h-4" />
-                </a>
+                <div className="flex flex-col items-end gap-2">
+                  <a
+                    href={project1.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${language === "pt" ? "Ver repositório" : "View repository"} ${project1.title}`}
+                    className="text-on-surface-variant hover:text-primary transition-colors p-2 border border-transparent hover:border-outline bg-surface-variant/40 flex items-center gap-1.5 font-mono text-xs"
+                  >
+                    <span className="hidden sm:inline">github.com</span>
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+
+                  {project1.researchUrl && (
+                    <a
+                      href={project1.researchUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${language === "pt" ? "Ver artigo de pesquisa" : "View research paper"} ${project1.title}`}
+                      className="text-on-surface-variant hover:text-primary transition-colors p-2 border border-transparent hover:border-outline bg-surface-variant/40 flex items-center gap-1.5 font-mono text-xs"
+                    >
+                      <span className="hidden sm:inline">
+                        {project1.researchLabel || t.projectsSection.viewResearch}
+                      </span>
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+                  )}
+                </div>
               </div>
 
               {/* Highlight Flag */}
               {project1.highlightBadge && (
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 mb-3 text-[11px] font-mono font-semibold text-primary bg-primary/10 border border-primary/40">
-                  <Sparkles className="w-3.5 h-3.5" />
-                  <span>{project1.highlightBadge}</span>
-                </div>
+                project1.researchUrl ? (
+                  <a
+                    href={project1.researchUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${project1.highlightBadge} - ${language === "pt" ? "Ver artigo de pesquisa" : "View research paper"}`}
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 mb-3 text-[11px] font-mono font-semibold text-primary bg-primary/10 border border-primary/40 hover:bg-primary/20 hover:border-primary transition-colors group/flag"
+                  >
+                    <Sparkles className="w-3.5 h-3.5" />
+                    <span>{project1.highlightBadge}</span>
+                    <ExternalLink className="w-3 h-3 opacity-70 group-hover/flag:opacity-100 transition-opacity ml-0.5" />
+                  </a>
+                ) : (
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 mb-3 text-[11px] font-mono font-semibold text-primary bg-primary/10 border border-primary/40">
+                    <Sparkles className="w-3.5 h-3.5" />
+                    <span>{project1.highlightBadge}</span>
+                  </div>
+                )
               )}
 
               <div className="font-mono text-[11px] text-on-surface-variant/80 uppercase tracking-widest mb-1">

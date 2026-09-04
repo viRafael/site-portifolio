@@ -45,7 +45,7 @@ export function Terminal() {
   };
 
   return (
-    <div className="w-full bg-surface border border-outline p-5 interactive-border relative overflow-hidden font-mono text-xs md:text-sm">
+    <div className="w-full bg-surface border border-outline p-4 sm:p-5 interactive-border relative overflow-hidden font-mono text-xs md:text-sm">
       {/* Top Window Bar */}
       <div className="flex items-center justify-between pb-3 mb-4 border-b border-outline/50">
         <div className="flex items-center gap-2">
@@ -72,19 +72,43 @@ export function Terminal() {
               <span className="text-on-background">{item.command}</span>
             </div>
             <div className="pl-4 text-on-surface-variant space-y-0.5 border-l border-primary/20">
-              {item.output.map((line, lIdx) => (
-                <div key={lIdx} className="leading-relaxed">
-                  {line}
-                </div>
-              ))}
+              {item.output.map((line, lIdx) => {
+                const urlMatch = line.match(/(https?:\/\/[^\s]+)/);
+                if (urlMatch) {
+                  const url = urlMatch[0];
+                  const [before, ...afterParts] = line.split(url);
+                  const after = afterParts.join(url);
+                  return (
+                    <div key={lIdx} className="leading-relaxed">
+                      {before}
+                      <a
+                        href={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-primary underline hover:text-on-background transition-colors break-all inline-flex items-center gap-1 font-semibold"
+                      >
+                        <span>{url}</span>
+                        <span className="text-[10px] no-underline">&nearr;</span>
+                      </a>
+                      {after}
+                    </div>
+                  );
+                }
+                return (
+                  <div key={lIdx} className="leading-relaxed">
+                    {line}
+                  </div>
+                );
+              })}
             </div>
           </div>
         ))}
 
         {/* Active Command Prompt */}
         <div className="flex items-center gap-2 pt-1">
-          <span className="text-primary font-semibold whitespace-nowrap">
-            {t.terminal.user}:{t.terminal.path}
+          <span className="text-primary font-semibold whitespace-nowrap text-xs">
+            <span className="hidden sm:inline">{t.terminal.user}:</span>
+            {t.terminal.path}
           </span>
           <input
             type="text"
@@ -93,7 +117,7 @@ export function Terminal() {
             onKeyDown={handleKeyDown}
             placeholder={t.terminal.placeholder}
             aria-label={language === "pt" ? "Comando de terminal" : "Terminal command"}
-            className="flex-1 bg-transparent border-none outline-none text-on-background text-xs md:text-sm placeholder:text-on-surface-variant/40"
+            className="flex-1 min-w-0 bg-transparent border-none outline-none text-on-background text-xs md:text-sm placeholder:text-on-surface-variant/40"
           />
           <span className="terminal-cursor" />
         </div>

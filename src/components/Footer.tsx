@@ -43,6 +43,15 @@ export function Footer() {
           </a>
 
           <a
+            href={t.personal.researchUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-primary transition-colors underline decoration-outline hover:decoration-primary underline-offset-4"
+          >
+            {t.footer.researchLabel}
+          </a>
+
+          <a
             href={`mailto:${t.personal.email}`}
             className="hover:text-primary transition-colors underline decoration-outline hover:decoration-primary underline-offset-4"
           >
