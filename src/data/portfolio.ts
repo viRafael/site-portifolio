@@ -41,6 +41,20 @@ export interface SkillCategory {
   skills: string[];
 }
 
+export interface PersonalLifeItem {
+  id: string;
+  icon: "reading" | "music" | "cooking" | "gym" | "muaythai" | "family";
+  label: string;
+  title: string;
+  description: string;
+}
+
+export interface PersonalLifeSection {
+  sectionTag: string;
+  title: string;
+  items: PersonalLifeItem[];
+}
+
 export interface PortfolioContent {
   nav: {
     about: string;
@@ -82,6 +96,7 @@ export interface PortfolioContent {
     quote: string;
     highlights: HighlightItem[];
   };
+  personalLifeSection: PersonalLifeSection;
   experienceSection: {
     sectionTag: string;
     title: string;
@@ -199,6 +214,56 @@ export const portfolioContent: Record<Language, PortfolioContent> = {
           href: "https://drive.google.com/file/d/1SQ5c2_XlFVYEGTERW3FSlOD4qIpctqsD/view?usp=sharing",
         },
         { label: "Liderança", value: "Diretoria Comercial na TITAN" },
+      ],
+    },
+    personalLifeSection: {
+      sectionTag: "05 // Vida Pessoal",
+      title: "Fora do Código",
+      items: [
+        {
+          id: "leitura",
+          icon: "reading",
+          label: "Livros",
+          title: "Leitura",
+          description:
+            "Gênero literário favorito: fantasia. Livro preferido: O Nome do Vento (Patrick Rothfuss).",
+        },
+        {
+          id: "musica",
+          icon: "music",
+          label: "Playlist",
+          title: "Música",
+          description:
+            "Gosto eclético — ouve principalmente rock e rap, mas também curte eletrônica.",
+        },
+        {
+          id: "cozinha",
+          icon: "cooking",
+          label: "Casa",
+          title: "Cozinha",
+          description: "Curte cozinhar e se descreve como uma pessoa caseira.",
+        },
+        {
+          id: "academia",
+          icon: "gym",
+          label: "Treino",
+          title: "Academia",
+          description: "Gosta de treinar e frequentar a academia.",
+        },
+        {
+          id: "muay-thai",
+          icon: "muaythai",
+          label: "Luta",
+          title: "Muay Thai",
+          description: "Pratica Muay Thai.",
+        },
+        {
+          id: "familia-pet",
+          icon: "family",
+          label: "Família",
+          title: "Família & Pet",
+          description: "Tem um irmão, uma irmã e um gato.",
+        },
       ],
     },
     experienceSection: {
@@ -406,6 +471,55 @@ export const portfolioContent: Record<Language, PortfolioContent> = {
           href: "https://drive.google.com/file/d/1SQ5c2_XlFVYEGTERW3FSlOD4qIpctqsD/view?usp=sharing",
         },
         { label: "Leadership", value: "Commercial Director at TITAN" },
+      ],
+    },
+    personalLifeSection: {
+      sectionTag: "05 // Personal Life",
+      title: "Life Outside the Code",
+      items: [
+        {
+          id: "reading",
+          icon: "reading",
+          label: "Books",
+          title: "Reading",
+          description:
+            "Favorite literary genre: fantasy. Favorite book: The Name of the Wind (Patrick Rothfuss).",
+        },
+        {
+          id: "music",
+          icon: "music",
+          label: "Playlist",
+          title: "Music",
+          description: "Eclectic taste — mostly rock and rap, but also enjoys electronic.",
+        },
+        {
+          id: "cooking",
+          icon: "cooking",
+          label: "Home",
+          title: "Cooking",
+          description: "Enjoys cooking and describes himself as a homebody.",
+        },
+        {
+          id: "gym",
+          icon: "gym",
+          label: "Training",
+          title: "Gym",
+          description: "Likes to work out and go to the gym.",
+        },
+        {
+          id: "muay-thai",
+          icon: "muaythai",
+          label: "Combat",
+          title: "Muay Thai",
+          description: "Practices Muay Thai.",
+        },
+        {
+          id: "family-pet",
+          icon: "family",
+          label: "Family",
+          title: "Family & Pet",
+          description: "Has a brother, a sister, and a cat.",
+        },
       ],
     },
     experienceSection: {
