@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { HeroAnimation } from "@/components/HeroAnimation";
 import { portfolioContent } from "@/data/portfolio";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -9,7 +8,7 @@ export function StringsPlayground() {
   const { language } = useLanguage();
   const t = portfolioContent[language];
 
-  const sectionHeading = t.stringsSection;
+  const sectionHeading = t.skillsSection;
 
   return (
     <section
@@ -22,9 +21,6 @@ export function StringsPlayground() {
             {sectionHeading.sectionTag}
           </span>
           <span className="text-xs text-on-surface-variant">{sectionHeading.title}</span>
-        </div>
-        <div className="p-4 md:p-6">
-          <HeroAnimation />
         </div>
       </div>
     </section>
